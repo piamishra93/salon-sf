@@ -1,0 +1,61 @@
+[
+  {
+    "id": "seed_001",
+    "title": "Art Bash 2026",
+    "date": "2026-04-30",
+    "startTime": "6:00 PM",
+    "venue": "SFMOMA",
+    "address": "151 Third St, San Francisco",
+    "source": "sfmoma",
+    "url": "https://www.sfmoma.org/program/art-bash-2026/",
+    "description": "SFMOMA's annual fundraising gala and party.",
+    "category": "Party"
+  },
+  {
+    "id": "seed_002",
+    "title": "Film Screening: Wanda",
+    "date": "2026-04-30",
+    "startTime": "7:30 PM",
+    "venue": "SFMOMA",
+    "address": "151 Third St, San Francisco",
+    "source": "sfmoma",
+    "url": "https://www.sfmoma.org/program/wanda/",
+    "description": "Barbara Loden's landmark 1970 film.",
+    "category": "Film"
+  },
+  {
+    "id": "seed_003",
+    "title": "Curator Talk: Wayne Thiebaud",
+    "date": "2026-05-01",
+    "startTime": "6:30 PM",
+    "venue": "de Young Museum",
+    "address": "50 Hagiwara Tea Garden Dr, San Francisco",
+    "source": "famsf",
+    "url": "https://www.famsf.org/events/curator-talk-thiebaud",
+    "description": "An evening with the curators behind the Thiebaud retrospective.",
+    "category": "Talk"
+  },
+  {
+    "id": "seed_004",
+    "title": "Poetry Reading with Ross Gay",
+    "date": "2026-05-02",
+    "startTime": "7:00 PM",
+    "venue": "City Lights Bookstore",
+    "address": "261 Columbus Ave, San Francisco",
+    "source": "citylights",
+    "url": "https://citylights.com/events/ross-gay",
+    "description": "Ross Gay reads from his latest collection.",
+    "category": "Talk"
+  },
+  {
+    "id": "seed_005",
+    "title": "Founders Dinner: AI & Culture",
+    "date": "2026-05-03",
+    "startTime": "7:00 PM",
+    "venue": "Private Location",
+    "source": "luma",
+    "url": "https://lu.ma/founders-dinner-sf",
+    "description": "An intimate dinner for founders thinking about technology and culture.",
+    "category": "Other"
+  }
+]
