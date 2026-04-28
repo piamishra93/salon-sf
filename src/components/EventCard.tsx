@@ -1,11 +1,25 @@
-import type { SalonEvent } from '@/lib/types'
+'use client'
+
+import type { SalonEvent, EventCategory } from '@/lib/types'
 
 const SOURCE_LABELS: Record<string, string> = {
   sfmoma: 'SFMOMA',
   famsf: 'FAMSF',
+  msp: 'Minnesota St Project',
   citylights: 'City Lights',
   luma: 'Luma',
   partiful: 'Partiful',
+}
+
+const CATEGORY_DOTS: Record<EventCategory, string> = {
+  Art:         '#c9b8a8',
+  Film:        '#a8b8c9',
+  Music:       '#a8c9b0',
+  Talk:        '#c9c4a8',
+  Workshop:    '#b8a8c9',
+  Performance: '#c9a8b8',
+  Party:       '#c9b0a8',
+  Other:       '#d4d0cc',
 }
 
 interface EventCardProps {
@@ -13,41 +27,39 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event }: EventCardProps) {
+  const dot = CATEGORY_DOTS[event.category] ?? CATEGORY_DOTS.Other
+
   return (
     <a
       href={event.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start gap-4 py-4 border-b border-neutral-100 hover:bg-neutral-50 -mx-4 px-4 transition-colors"
+      className="group block border-b border-stone-100 pb-3 last:border-b-0"
     >
-      <div className="w-16 shrink-0 text-right">
-        <span className="text-sm text-neutral-400">{event.startTime}</span>
+      {/* Time + category dot */}
+      <div className="flex items-center gap-1.5 mb-1">
+        <span className="text-[9px] tracking-[0.15em] uppercase text-stone-400">
+          {event.startTime}
+        </span>
+        <span
+          className="w-[5px] h-[5px] rounded-full shrink-0"
+          style={{ background: dot }}
+        />
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <h3 className="text-sm font-medium text-neutral-900 group-hover:text-neutral-600 transition-colors leading-snug">
-              {event.isPick && (
-                <span className="inline-block mr-1.5 text-amber-500">★</span>
-              )}
-              {event.title}
-            </h3>
-            <p className="text-sm text-neutral-500 mt-0.5">{event.venue}</p>
-          </div>
+      {/* Title */}
+      <div className="font-serif text-[14px] leading-snug text-stone-900 group-hover:text-stone-500 transition-colors duration-150">
+        {event.isPick && <span className="mr-1 text-stone-300">*</span>}
+        {event.title}
+      </div>
 
-          <div className="shrink-0 flex items-center gap-2">
-            <span className="text-xs text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
-              {event.category}
-            </span>
-            <span className="text-xs text-neutral-300">
-              {SOURCE_LABELS[event.source] ?? event.source}
-            </span>
-          </div>
+      {/* Venue + description — hidden at rest, revealed on hover */}
+      <div className="overflow-hidden max-h-0 group-hover:max-h-24 transition-all duration-300 ease-in-out">
+        <div className="text-[10px] text-stone-400 mt-1.5">
+          {event.venue}{SOURCE_LABELS[event.source] ? ` · ${SOURCE_LABELS[event.source]}` : ''}
         </div>
-
         {event.description && (
-          <p className="text-xs text-neutral-400 mt-1 line-clamp-2 leading-relaxed">
+          <p className="text-[10px] text-stone-400 mt-0.5 italic leading-relaxed line-clamp-2">
             {event.description}
           </p>
         )}

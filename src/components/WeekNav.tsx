@@ -13,19 +13,21 @@ export default function WeekNav({ weekStart }: WeekNavProps) {
   const nextWeek = format(addWeeks(start, 1), 'yyyy-MM-dd')
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-8">
       <Link
         href={`/week/${prevWeek}`}
-        className="text-neutral-400 hover:text-neutral-900 transition-colors text-sm"
+        className="text-stone-300 hover:text-stone-900 transition-colors text-base leading-none"
+        aria-label="Previous week"
       >
         ←
       </Link>
-      <span className="text-sm font-medium tracking-wide uppercase text-neutral-500">
-        {format(start, 'MMM d')}–{format(end, 'MMM d, yyyy')}
+      <span className="text-xs tracking-[0.15em] uppercase text-stone-400 select-none">
+        {format(start, 'MMM d')} – {format(end, 'MMM d, yyyy')}
       </span>
       <Link
         href={`/week/${nextWeek}`}
-        className="text-neutral-400 hover:text-neutral-900 transition-colors text-sm"
+        className="text-stone-300 hover:text-stone-900 transition-colors text-base leading-none"
+        aria-label="Next week"
       >
         →
       </Link>

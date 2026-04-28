@@ -1,4 +1,4 @@
-export type EventSource = 'luma' | 'partiful' | 'sfmoma' | 'famsf' | 'citylights'
+export type EventSource = 'luma' | 'partiful' | 'sfmoma' | 'famsf' | 'citylights' | 'msp'
 
 export type EventCategory =
   | 'Art'

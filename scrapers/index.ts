@@ -4,6 +4,7 @@ import { scrapeSFMOMA } from './sfmoma'
 import { scrapeFAMSF } from './famsf'
 import { scrapeLuma } from './luma'
 import { scrapeCityLights } from './citylights'
+import { scrapeMSP } from './msp'
 import type { SalonEvent } from '../src/lib/types'
 
 async function run() {
@@ -14,9 +15,10 @@ async function run() {
     scrapeFAMSF(),
     scrapeLuma(),
     scrapeCityLights(),
+    scrapeMSP(),
   ])
 
-  const sourceNames = ['SFMOMA', 'FAMSF', 'Luma', 'City Lights']
+  const sourceNames = ['SFMOMA', 'FAMSF', 'Luma', 'City Lights', 'Minnesota Street Project']
   const allEvents: SalonEvent[] = []
 
   for (const [i, result] of results.entries()) {

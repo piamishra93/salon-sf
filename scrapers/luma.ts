@@ -29,12 +29,18 @@ interface LumaEvent {
   description?: string
   url: string
   geo_address_info?: { full_address?: string; city?: string }
-  hosts?: Array<{ name: string }>
   tags?: string[]
 }
 
+interface LumaEntry {
+  event: LumaEvent
+  calendar?: { name?: string }
+  hosts?: Array<{ name: string }>
+  geo_address_info?: { full_address?: string }
+}
+
 interface LumaResponse {
-  entries?: Array<{ event: LumaEvent }>
+  entries?: LumaEntry[]
   has_more?: boolean
   next_cursor?: string
 }
@@ -47,7 +53,7 @@ export async function scrapeLuma(): Promise<SalonEvent[]> {
     pagination_limit: '50',
     geo_latitude: '37.7749',
     geo_longitude: '-122.4194',
-    geo_radius_km: '20',
+    geo_radius_km: '8',
     after: new Date().toISOString(),
   })
 
@@ -74,6 +80,20 @@ export async function scrapeLuma(): Promise<SalonEvent[]> {
       hour12: true,
     })
 
+    // venue: prefer calendar name (the organizer), fall back to first host
+    const venue =
+      entry.calendar?.name ??
+      entry.hosts?.[0]?.name ??
+      'TBD'
+
+    // address: at entry level, not event level
+    const address =
+      entry.geo_address_info?.full_address ??
+      e.geo_address_info?.full_address
+
+    // skip events with a known non-SF address (match ", San Francisco, CA" to avoid "San Francisco Bay University" etc.)
+    if (address && !address.includes(', San Francisco, CA')) continue
+
     events.push({
       id: makeId(e.api_id),
       title: e.name,
@@ -82,8 +102,8 @@ export async function scrapeLuma(): Promise<SalonEvent[]> {
       endTime: e.end_at
         ? new Date(e.end_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
         : undefined,
-      venue: e.hosts?.[0]?.name ?? 'TBD',
-      address: e.geo_address_info?.full_address,
+      venue,
+      address,
       source: 'luma',
       url: `https://lu.ma/${e.url}`,
       description: e.description,
