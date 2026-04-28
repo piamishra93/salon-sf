@@ -19,6 +19,7 @@ const CATEGORY_DOTS: Record<EventCategory, string> = {
   Workshop:    '#b8a8c9',
   Performance: '#c9a8b8',
   Party:       '#c9b0a8',
+  Tour:        '#a8c9c4',
   Other:       '#d4d0cc',
 }
 
